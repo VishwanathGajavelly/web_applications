@@ -1,0 +1,87 @@
+<html ng-app="todoApp">
+
+<head>
+    <title>Applied Jobs</title>
+    <script src='angular.js'></script>
+    <script src='app.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Cuprum|Oswald|Slabo+27px" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <style>
+        body{
+            background-color: #f8f8f8;
+            font-family: Cuprum;
+            font-size: 8px;
+        }
+        h1 {
+            font-family: Oswald;
+        }
+     
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+                <center><h2>Job Applications</h2></center> <br>
+
+                <div ng-controller="TodoCtrl as ctrl">
+
+                    <h3> Add New: </h3>
+                    
+                    <div class="panel panel-default">
+
+                        <table class="panel-body table ">
+                            
+                            <tr>
+                                <td style="width: 33.3%"> Company </td>
+                                <td style="width: 33.3%"> Location </td>
+                                <td style="width: 33.3%"> Job Title </td>
+                            </tr>
+
+                            <tr>
+
+                                <td style="width: 32%"> <input type="text" ng-model="ctrl.newCompany"> </td>
+                                <td style="width: 32%"> <input type="text" ng-model="ctrl.newLocation"> </td>
+                                <td style="width: 32%"> <input type="text" ng-model="ctrl.jobTitle"> </td>
+                                <td style="width: 4%"> <button class= 'btn btn-success' ng-click="ctrl.addNewTodo()">Add</button> </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                
+                    <p>
+                        <h3> Previously Applied: </h3>
+                    </p>
+
+                    <ol >
+                        <li style="list-style-type: none; padding:0px; border-radius: 5px !important;"  ng-repeat="todo in ctrl.todos track by $index">
+                            <table class="table table-bordered table-condensed" style=" border-radius: 5px important;">
+                                
+                                <tr>
+                                    <td style=" width: 3%"> {{ $index+1 }}</td>
+                                    <td style=" width: 20%"> <span ng-dblclick = "contentEdit(todo.companyName)" ng-keydown ="enterAgain(todo.companyName)" ng-model= "todo.companyName" > {{ todo.companyName}} </span> </td>
+                                    <td style=" width: 20%"> <span ng-dblclick = "contentEdit(todo.location)" ng-model= "todo.location" > {{ todo.location}}</span> </td>
+                                    <td style=" width: 20%"> <span ng-dblclick = "contentEdit(todo.date)" ng-model= "todo.date" > {{ todo.date }}</span> </td>
+                                    <td style=" width: 20%"> <span ng-dblclick = "contentEdit(todo.jobTitle)" ng-model= "todo.jobTitle" > {{ todo.jobTitle}} </span> </td>
+                                    <td style=" width: 5%"> <button class= "btn btn-danger" ng-click="ctrl.deleteTodo($index)">Delete</button> </td>
+                                </tr>
+                            
+                                
+                            </table>
+                        </li>
+
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>
