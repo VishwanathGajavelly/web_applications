@@ -1,54 +1,54 @@
-var app = angular.module("todoApp", []);
-app.controller("TodoCtrl", TodoCtrl);
+var app = angular.module("JobApp", []);
+app.controller("JobCtrl", JobCtrl);
 
-function TodoCtrl() {
+function JobCtrl() {
     
-    this.todos = [];
-    var taskData = localStorage['tasksList'];
+    this.jobs = [];
+    var jobData = localStorage['jobsList'];
 
-    if(taskData != undefined) {
-		this.todos = JSON.parse(taskData);
+    if(jobData != undefined) {
+		this.jobs = JSON.parse(jobData);
 	}
 
     
-    localStorage['tasksList'] = JSON.stringify(this.todos);
+    localStorage['jobsList'] = JSON.stringify(this.jobs);
     
-    this.addNewTodo = function() {
-        this.todos.push({'date': new Date().toDateString(), 'companyName': this.newCompany ,'location': this.newLocation ,'jobTitle': this.jobTitle  });
-        this.newTodo = "";
+    this.addNewJob = function() {
+        this.jobs.push({'date': new Date().toDateString(), 'companyName': this.newCompany ,'location': this.newLocation ,'jobTitle': this.jobTitle  });
+        this.newJob = "";
     
-        localStorage['tasksList'] = JSON.stringify(this.todos);
+        localStorage['jobsList'] = JSON.stringify(this.jobs);
 	}
 
     this.contentEdit = function(msg) {
-		console.log(this.todos);
+		console.log(this.jobs);
 		console.log("doubleclicked");
 		
-		for(i=0;i<this.todos.length;i++) {
-			if(this.todos[i].companyName == msg) {
-				this.todos[i].companyName = event.target.innerText;
+		for(i=0;i<this.jobs.length;i++) {
+			if(this.jobs[i].companyName == msg) {
+				this.jobs[i].companyName = event.target.innerText;
 			}
 		}
 
-		localStorage['tasksList'] = JSON.stringify(this.todos);
+		localStorage['jobsList'] = JSON.stringify(this.jobs);
 
-		console.log(this.todos);
+		console.log(this.jobs);
 
 		event.target.contentEditable = event.target.contentEditable == "false" ? "true" : "false";
 	};
 
     this.enterAgain = function(msg) {
 		if(event.which == 13 && msg != "") {
-			$scope.contentEdit(msg);
+			this.contentEdit(msg);
 			console.log(11);
 		}
 	}
   
-    this.deleteTodo = function(index) {
+    this.deleteJob = function(index) {
         if (confirm('Are you sure you want to delete this?')) {
-            this.todos.splice(index, 1);
+            this.jobs.splice(index, 1);
             delete window.localStorage[index];
-            localStorage['tasksList'] = JSON.stringify(this.todos);
+            localStorage['jobsList'] = JSON.stringify(this.jobs);
         }
     }
 }
