@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <title>Applied Jobs</title>
+    <link href="https://fonts.googleapis.com/css?family=Cuprum|Oswald|Slabo+27px" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/main.js">
+
+    </script>
+
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: Cuprum;
+            font-size: 8px;
+        }
+
+        h1 {
+            font-family: Oswald;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+                <center>
+                    <h2>Job Applications</h2>
+                </center> <br>
+
+                <div>
+
+
+                    <% if(errors != undefined) { %>
+                        <ul>
+                            <h4> Failed to Add.</h4>
+                            <br> <h4> Please go back and correct the below errors.</h4>
+                            <hr>
+                            <% errors.forEach(function(error){ %>
+                                <h5 style="color: red">
+                                    <li>
+                                        <%= error.msg %>
+                                    </li>
+                                </h5>
+                                <% }) %>
+                        </ul>
+                        <% } %>
+                            <% if(errors == undefined) { %>
+
+                                <form method="POST" action="/jobs/add">
+
+                                    <h3> Add New: </h3>
+
+                                    <div class="panel panel-default">
+
+                                        <table class="panel-body table ">
+
+                                            <tr>
+                                                <td style="width: 25%"> Date </td>
+                                                <td style="width: 25%"> Company </td>
+                                                <td style="width: 25%"> Location </td>
+                                                <td style="width: 25%"> Job Title </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="width: 24%"> <input type="date" name="date"> </td>
+                                                <td style="width: 24%"> <input type="text" name="company"> </td>
+                                                <td style="width: 24%"> <input type="text" name="location"> </td>
+                                                <td style="width: 24%"> <input type="text" name="title"> </td>
+                                                <td style="width: 4%"> <button class='btn btn-success' type="submit" value="Add">Add</button> </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                                <br>
+
+                                <p>
+                                    <h3> Previously Applied: </h3>
+                                </p>
+
+                                <ol>
+                                    <li style="list-style-type: none; padding:0px; border-radius: 5px !important;">
+                                        <table class="table table-bordered table-condensed" style=" border-radius: 5px important;">
+
+                                            <% jobs.forEach(function(job){ %>
+
+                                                <tr>
+                                                    <td style=" width: 10%">
+                                                        <%= job.date %>
+                                                    </td>
+                                                  
+                                                    <td style=" width: 25%">
+                                                        <%= job.company %>
+                                                    </td>
+                                                    <td style=" width: 25%">
+                                                        <%= job.location %>
+                                                    </td>
+                                                    <td style=" width: 25%">
+                                                        <%= job.title %>
+                                                    </td>
+                                                    <td style=" width: 5%"> <button class="btn btn-danger"> <span class="deleteJob" data-id="<%=job._id%> "> Delete </span></button>                                                        </td>
+                                                </tr>
+                                                <% }) %>
+
+
+                                        </table>
+                                    </li>
+
+                                </ol>
+
+                                <% } %>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</body>
+
+</html>
